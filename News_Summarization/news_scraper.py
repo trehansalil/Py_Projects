@@ -76,7 +76,7 @@ for i in range(100000):
         r=requests.post(ajax_url,payload,headers=headers)
         start_id=r.content.decode("utf-8")[16:26]
         print(start_id)
-        soup = BeautifulSoup(json.loads(r.text)['html'])
+        soup = BeautifulSoup(json.loads(r.text)['html'], "html.parser")
         
         storedata(soup)
     except:
