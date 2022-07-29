@@ -65,7 +65,7 @@ print(start_id)
 
 import json
 
-for i in range(100):
+for i in range(100000):
     print(i,len(dict["headlines"]),start_id)
     ajax_url="https://inshorts.com/en/ajax/more_news"
     if len(url.split("/")) == 6:
@@ -82,7 +82,7 @@ for i in range(100):
     except:
         print('Skipping')
         pass
-    if i%10==0:
+    if i%30==0:
         
         df = pd.DataFrame(dict)
         df['day'] = df['date'].apply(lambda x: x.split(',')[1].strip())
