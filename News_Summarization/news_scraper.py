@@ -82,7 +82,7 @@ for i in range(100):
     except:
         print('Skipping')
         pass
-    if i%1000==0:
+    if i%10==0:
         
         df = pd.DataFrame(dict)
         df['day'] = df['date'].apply(lambda x: x.split(',')[1].strip())
