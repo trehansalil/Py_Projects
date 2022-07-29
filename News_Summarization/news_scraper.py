@@ -43,9 +43,10 @@ dict={"headlines":[],"text":[],"date":[],"author":[],"read_more":[], "image_url"
 
 def storedata(soup):
     for data in soup.findAll("div",{"class":"news-card z-depth-1"}):
-        #print(dict["headlines"],data.find(itemprop="headline").getText())
-        # print(data.find(itemprop="description")['content'].strip())
-        if data.find(itemprop="description")['content'].strip() not in dict["headlines"]:
+
+        # De-duplication logic is here
+        url = data.find(itemprop="url")['content'].strip()
+        if news_data.find_one({'inshorts_url': url}) is None:
             #print(data.find(itemprop="headline").getText(),dict["headlines"].index(data.find(itemprop="headline").getText()))
             dict["headlines"].append(data.find(itemprop="description")['content'].strip())
             dict["image_url"].append(data.find(itemprop="url")['content'].strip())
