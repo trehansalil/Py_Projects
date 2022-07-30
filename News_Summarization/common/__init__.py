@@ -41,7 +41,7 @@ proxies = {"http": "http://salilt:thanosi_country-in@proxy.iproyal.com:12323",
            "https": "http://salilt:thanosi_country-in@proxy.iproyal.com:12323"
            }
 
-NEWS_CRAWLER_ENV = os.getenv("NEWS_PROJ_ENV", "DEV")
+NEWS_CRAWLER_ENV = os.getenv("NEWS_PROJ_ENV", "STAGE")
 print(NEWS_CRAWLER_ENV)
 if NEWS_CRAWLER_ENV == 'DEV':
     client = MongoClient(dev_DB_URI, maxPoolSize=10000, connect=False)
