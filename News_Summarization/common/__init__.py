@@ -24,6 +24,7 @@ sentry_sdk.init(
 )
 
 cur_dir = os.getcwd().replace("/common", '')
+print(cur_dir)
 exec_file_path = os.path.join(cur_dir, 'properties.config')
 print(exec_file_path)
 
