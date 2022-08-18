@@ -14,5 +14,18 @@ cd -
 
 BASEDIR=$(dirname $0)
 echo "Script location: ${BASEDIR}"
-echo "Scraping the category: ${1}"
-NEWS_PROJ_ENV=STAGE python3 news_scraper.py "$1" > logs/news_scraper_"$1".log 2>&1&
+
+
+# if $1 is not set, then set it to "general"
+if [ -z "$1" ]; then
+    echo "No category specified. Setting it to 'general'"
+    category="general"
+    echo "Scraping the category: ${category}"
+    NEWS_PROJ_ENV=STAGE python3 news_scraper.py > logs/news_scraper_"$category".log 2>&1&
+else
+    echo "Scraping the category: ${1}"
+    category="$1"
+    NEWS_PROJ_ENV=STAGE python3 news_scraper.py "$1" > logs/news_scraper_"$1".log 2>&1&
+fi
+
+# 

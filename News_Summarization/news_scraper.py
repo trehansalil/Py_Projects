@@ -65,6 +65,7 @@ start_id=soup.findAll("script",{"type":"text/javascript"})[-1].get_text().split(
 print(start_id)
 
 import json
+storedata(soup)
 
 for i in range(100000):
     print(i,len(dict["headlines"]),start_id)
@@ -95,5 +96,12 @@ for i in range(100000):
         if len(url.split("/")) == 6:
             df.to_csv(f"data/data_{param}_{str(i/1000)}.csv", index=False)
         else:
-            df.to_csv("data"+str(i/1000)+".csv", index=False)
+            df.to_csv("data/data"+str(i/1000)+".csv", index=False)
         dict={"headlines":[],"text":[],"date":[],"author":[],"read_more":[], "image_url": [], 'inshorts_url':[], 'original_source': []}
+
+
+# extracting the current file name
+file_name = sys.argv[0].split('/')[-1]
+
+# Closing all the open mongodb connections
+close_connections(file_name_to_be_closed=file_name)
