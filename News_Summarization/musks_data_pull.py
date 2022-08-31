@@ -51,6 +51,8 @@ df = pd.DataFrame.from_dict(result)
 
 print(df.head())
 
+df.to_excel('data/musk_data_pull.xlsx')
+
 # extracting the current file name
 file_name = sys.argv[0].split('/')[-1]
 
