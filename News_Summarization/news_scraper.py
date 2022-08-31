@@ -93,10 +93,10 @@ for i in range(100000):
         for enum, record in enumerate(data_dict):
             # print(i)
             update_data(collection=news_data, record=record, enum=enum, type='update', key='inshorts_url')
-        if len(url.split("/")) == 6:
-            df.to_csv(f"data/data_{param}_{str(i/1000)}.csv", index=False)
-        else:
-            df.to_csv("data/data"+str(i/1000)+".csv", index=False)
+        # if len(url.split("/")) == 6:
+        #     df.to_csv(f"data/data_{param}_{str(i/1000)}.csv", index=False)
+        # else:
+        #     df.to_csv("data/data"+str(i/1000)+".csv", index=False)
         dict={"headlines":[],"text":[],"date":[],"author":[],"read_more":[], "image_url": [], 'inshorts_url':[], 'original_source': []}
 
 
@@ -105,3 +105,13 @@ file_name = sys.argv[0].split('/')[-1]
 
 # Closing all the open mongodb connections
 close_connections(file_name_to_be_closed=file_name)
+
+from plyer import notification
+
+
+notification.notify(
+    title = 'Notification',
+    message = 'News Crawled',
+    app_icon = None,
+    timeout = 10,
+)
