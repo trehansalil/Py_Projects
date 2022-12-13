@@ -1,3 +1,4 @@
+pip install -r requirements.txt
 bash scripts/news_scraper_script.sh automobile
 bash scripts/news_scraper_script.sh business
 bash scripts/news_scraper_script.sh entertainment
