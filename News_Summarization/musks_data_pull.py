@@ -55,5 +55,5 @@ def data_pull(lis):
 
     return df
 
-# data_pull(lis=ls)
+data_pull(lis=ls)
 
