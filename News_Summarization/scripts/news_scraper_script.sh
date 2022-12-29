@@ -6,6 +6,9 @@ cd "$_d"
 # shellcheck disable=SC2103
 # going up two levels
 cd ..
+git config --global user.email "trehansalil1@gmail.com"
+git config --global user.name "Salil Trehan"
+pip install -r requirements.txt
 cd ..
 
 source env/bin/activate
