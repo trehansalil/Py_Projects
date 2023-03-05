@@ -73,7 +73,7 @@ def update_data(collection, record, enum, type, key='tconst'):
             collection.insert_one(record, upsert=True)
             print(f"Record {enum} inserted")
         except Exception as e:
-            a = f"Record {enum} insert failed for imdb_id {record[key]} with error as {e}"
+            a = f"Record {enum} insert failed for {key}: {record[key]} with error as {e}"
             sentry_sdk.capture_exception(e)
             sentry_sdk.capture_message(a)
     elif type == 'update':
@@ -82,7 +82,7 @@ def update_data(collection, record, enum, type, key='tconst'):
             collection.update_one({key: record[key]}, {"$set": record}, upsert=True)
             print(f"Record {enum} updated")
         except Exception as e:
-            a = f"Record {enum} update failed for imdb_id {record[key]} with error as {e}"
+            a = f"Record {enum} update failed for {key}: {record[key]} with error as {e}"
             sentry_sdk.capture_exception(e)
             sentry_sdk.capture_message(a)
     elif type == 'delete':
@@ -90,7 +90,7 @@ def update_data(collection, record, enum, type, key='tconst'):
             collection.delete_one({key: record[key]})
             print(f"Record {enum} deleted")
         except Exception as e:
-            a = f"Record {enum} delete failed for imdb_id {record[key]} with error as {e}"
+            a = f"Record {enum} delete failed for {key}: {record[key]} with error as {e}"
             sentry_sdk.capture_exception(e)
             sentry_sdk.capture_message(a)
     else:

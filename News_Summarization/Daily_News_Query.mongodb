@@ -14,7 +14,7 @@ db.getCollection('news_data')
       */
     },
     {
-      "headlines": 1, "date": 1, "_id": 0
+      "headlines": 1, "date": 1, "_id": 0, "inshorts_url": 1
       /*
       * Projection
       * _id: 0, // exclude _id

@@ -38,7 +38,7 @@ response = requests.request("GET", url, headers=headers, data=payload)
 
 soup = BeautifulSoup(response.text, 'html.parser')
 
-dict={"headlines":[],"text":[],"date":[],"author":[],"read_more":[], "image_url": [], 'inshorts_url':[], 'original_source': []}
+dict={"headlines":[],"text":[],"datetime":[],"date":[],"author":[],"read_more":[], "image_url": [], 'inshorts_url':[], 'original_source': []}
 
 
 def storedata(soup):
@@ -51,6 +51,7 @@ def storedata(soup):
             dict["headlines"].append(data.find(itemprop="description")['content'].strip())
             dict["image_url"].append(data.find(itemprop="url")['content'].strip())
             dict["text"].append(data.find(itemprop="articleBody").getText().strip())
+            dict['datetime'].append(parse(data.find("span",{"class":"time"})['content'].strip()))
             dict["date"].append(data.find("span",{"clas":"date"}).getText().strip())
             dict["author"].append(data.find("span",{"class":"author"}).getText().strip())
             dict["inshorts_url"].append(data.find(itemprop="mainEntityOfPage").get("itemid").strip())
@@ -89,15 +90,38 @@ for i in range(100000):
         df = pd.DataFrame(dict)
         df['day'] = df['date'].apply(lambda x: x.split(',')[1].strip())
         df['date'] = df['date'].apply(lambda x: parse(x.split(',')[0]))
+        df['category'] = [[param]]*df.shape[0]
+
         data_dict = df.to_dict(orient='records')
         for enum, record in enumerate(data_dict):
-            # print(i)
-            update_data(collection=news_data, record=record, enum=enum, type='update', key='inshorts_url')
+
+            url = record['inshorts_url']
+            cat = record['category']
+            datetime = record['datetime']
+            a = news_data.find_one({'inshorts_url': url})
+
+            if a is not None:
+                if 'category' in a:
+                    if param not in a['category']:
+                        a['category'].extend(cat)
+                        a['category'] = list(set(a['category']))
+                        update_data(collection=news_data, record=a, enum=enum, type='update', key='inshorts_url')
+                else:
+                    a['category'] = []
+                    a['category'].extend(cat)
+                    update_data(collection=news_data, record=a, enum=enum, type='update', key='inshorts_url')
+                
+                if 'datetime' not in a:
+                    print("run")
+                    a['datetime'] = datetime
+                    update_data(collection=news_data, record=a, enum=enum, type='update', key='inshorts_url')
+            else:
+                update_data(collection=news_data, record=record, enum=enum, type='insert', key='inshorts_url')
         # if len(url.split("/")) == 6:
         #     df.to_csv(f"data/data_{param}_{str(i/1000)}.csv", index=False)
         # else:
         #     df.to_csv("data/data"+str(i/1000)+".csv", index=False)
-        dict={"headlines":[],"text":[],"date":[],"author":[],"read_more":[], "image_url": [], 'inshorts_url':[], 'original_source': []}
+        dict={"headlines":[],"text":[],"datetime":[],"date":[],"author":[],"read_more":[], "image_url": [], 'inshorts_url':[], 'original_source': []}
 
 
 # extracting the current file name
