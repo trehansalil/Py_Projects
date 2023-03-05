@@ -11,4 +11,5 @@ bash scripts/news_scraper_script.sh technology
 bash scripts/news_scraper_script.sh world
 bash scripts/news_scraper_script.sh sports
 bash scripts/news_scraper_script.sh hatke
+bash scripts/news_scraper_script.sh miscellaneous
 bash scripts/news_scraper_script.sh
