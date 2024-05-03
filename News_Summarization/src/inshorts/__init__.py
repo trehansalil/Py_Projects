@@ -106,7 +106,7 @@ class InshortsAPI:
             self.enum += 1
         else:
             self.enum += 1       
-            self.page += 1    
+            # self.page += 1    
 
         update_data(collection=news_data, record=data_dict, enum=self.enum, type='update', key='inshorts_url')
 
@@ -183,6 +183,7 @@ class InshortsAPI:
             self.data = [self.process_json(a=record['news_obj']) for record in a['data']['news_list'] if 'news_obj' in record]
         else:
             self.data = []
+            print(a)
             
         self.page += 1 
     

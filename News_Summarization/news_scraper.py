@@ -19,7 +19,7 @@ api.scrape()
 while api.len_scraped != 0:
     api.scrape()
     if api.len_scraped == 0:
-        time.sleep(random.choice(l))
+        # time.sleep(random.choice(l))
         api.scrape()
         print(f"Page No: {api.page}")
     # break
