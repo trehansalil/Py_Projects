@@ -65,7 +65,7 @@ elif NEWS_CRAWLER_ENV == 'STAGE':
 
 
 def update_data(collection, record, enum, type, key='tconst'):
-    print(record)
+    # print(record)
     if type == 'insert':
         record['inserted_at'] = datetime.now()
         record['updated_at'] = datetime.now()
