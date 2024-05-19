@@ -11,3 +11,5 @@
 */logs/
 **/__pycache__/
 **/logs/
+News_Summarization/env
+.env
