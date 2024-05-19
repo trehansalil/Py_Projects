@@ -28,4 +28,8 @@ bash scripts/news_scraper_script.sh miscellaneous
 sleep 1m
 bash scripts/news_scraper_script.sh fashion
 sleep 1m
-bash scripts/news_scraper_script.sh
+bash scripts/news_scraper_script.sh education
+sleep 1m
+bash scripts/news_scraper_script.sh Health___Fitness
+sleep 1m
+bash scripts/news_scraper_script.sh 
